@@ -1,3 +1,4 @@
+#pragma once
 
 #if defined(__APPLE__)
 
@@ -12,6 +13,7 @@
 #include <SDL2_image.h>
 #include <SDL2_mixer.h>
 #include <SDL2_ttf.h>
+
 #endif
 
 #include <cstdlib>
