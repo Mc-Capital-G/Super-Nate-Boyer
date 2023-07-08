@@ -36,5 +36,7 @@ void renderObj::createTexture(std::string path, SDL_Renderer* renderer) {
 }
 
 void renderObj::render(SDL_Renderer* renderer, SDL_Rect* c) {
+	target->x -= target->w/2;
+	target->y -= target->h/2;
 	SDL_RenderCopy(renderer, tex, c, target);
 }

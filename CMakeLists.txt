@@ -11,7 +11,18 @@ find_package(SDL2_ttf REQUIRED PATHS libs/)
 
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
 
-add_executable(${PROJECT_NAME} src/main.cpp src/window.cpp src/inputHandler.cpp src/timer.cpp src/closeSDL.cpp src/renderObj.cpp src/animatedObj.cpp)
+add_executable(${PROJECT_NAME} 
+    src/main.cpp 
+    src/window.cpp 
+    src/inputHandler.cpp 
+    src/timer.cpp 
+    src/closeSDL.cpp 
+    src/renderObj.cpp 
+    src/animatedObj.cpp 
+    src/button.cpp 
+    src/menu.cpp 
+    src/font.cpp
+    )
 
 target_include_directories(${PROJECT_NAME} PUBLIC include/ ${SDL2_INCLUDE_DIRS})
 
