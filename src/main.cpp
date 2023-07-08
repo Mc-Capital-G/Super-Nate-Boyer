@@ -8,7 +8,7 @@
 int main(int argc, char* argv[]) {
 
     Window window;
-    if(!window.init(1280, 720)) {
+    if(!window.init("Super Nate Boyer", SCREEN_WIDTH, SCREEN_HEIGHT)) {
         return 1;
     }
     else {
@@ -25,8 +25,8 @@ int main(int argc, char* argv[]) {
 
             SDL_RenderClear(window.gameRenderer);
             
-            title.animRender(window.gameRenderer, 540, 260, 200, 200);
-            globe.animRender(window.gameRenderer, 0, 0);
+            title.animRender(window.gameRenderer, 440, 120, 400, 400);
+            globe.animRender(window.gameRenderer, 0, 620, 100, 100);
 
 
             SDL_RenderPresent(window.gameRenderer);

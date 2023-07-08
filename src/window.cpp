@@ -14,13 +14,13 @@ Window::~Window() {
 	gameRenderer = NULL;
 }
 
-bool Window::init(int screenWidth, int screenHeight) {
+bool Window::init(const char* title, int screenWidth, int screenHeight) {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
 		printf("SDL could not be initialized. SDL Error: %s\n", SDL_GetError());
 		return false;
 	}
 	else {
-		gameWindow = SDL_CreateWindow("Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_INPUT_FOCUS);
+		gameWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_INPUT_FOCUS);
 		if (gameWindow == NULL) {
 			printf("SDL Window could not be created. SDL Error: %s\n", SDL_GetError());
 			return false;
