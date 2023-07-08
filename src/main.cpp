@@ -16,6 +16,7 @@ int main(int argc, char* argv[]) {
         handler.inputTimer.start();
 
         animatedObj title("assets/titlewiggle.png", window.gameRenderer, 15, 800, 800);
+        animatedObj globe("assets/nateboyer3d.png", window.gameRenderer, 10, 400, 400);
 
         while (!handler.quit) {
             handler.handle();
@@ -24,9 +25,9 @@ int main(int argc, char* argv[]) {
 
             SDL_RenderClear(window.gameRenderer);
             
-            //title.render(window.gameRenderer);
-            SDL_Rect temp = {1280/2, 720/2, 200, 200};
-            title.animRender(window.gameRenderer, &temp);
+            title.animRender(window.gameRenderer, 540, 260, 200, 200);
+            globe.animRender(window.gameRenderer, 0, 0);
+
 
             SDL_RenderPresent(window.gameRenderer);
             SDL_Delay(100);

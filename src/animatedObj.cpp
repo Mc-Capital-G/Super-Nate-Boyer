@@ -11,11 +11,14 @@ animatedObj::animatedObj(std::string path, SDL_Renderer* renderer, int frames, i
     std::cout << "sw = " << spriteWidth << "sh = " << spriteHeight << "mf = " << maxFrames << std::endl;
 }
 
-void animatedObj::animRender(SDL_Renderer* ren, SDL_Rect* t, int animationNum) {
+void animatedObj::animRender(SDL_Renderer* ren, int x, int y, int w, int h, int animationNum) {
     std::cout << "current frame = " << currentFrame << std::endl;
     SDL_Rect c = {spriteWidth * currentFrame, spriteHeight * animationNum, spriteWidth, spriteHeight};
     std::cout << "c.x = " << c.x << " c.y = " << c.y << " c.h = " << c.h << " c.w = " << c.w << std::endl;
-    target = t;
+    SDL_Rect t = {x, y, w, h};
+    if(t.w == 0) t.w = spriteWidth;
+    if(t.h == 0) t.h = spriteHeight;
+    target = &t;
     render(ren, &c);
     currentFrame++;
     if(currentFrame >= maxFrames) currentFrame = 0;
