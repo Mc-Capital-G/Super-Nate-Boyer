@@ -16,8 +16,8 @@ int main(int argc, char* argv[]) {
         while (!handler.quit) {
             handler.handle();
 
-
             SDL_RenderClear(window.gameRenderer);
+
             SDL_RenderPresent(window.gameRenderer);
         }
 
