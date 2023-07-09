@@ -24,7 +24,7 @@ void timer::stop() {
 void timer::pause() {
 	if (started && !paused) {
 		paused = true;
-		pausedTicks = SDL_GetTicks() - startTicks;
+		pausedTicks = SDL_GetTicks64() - startTicks;
 		startTicks = 0;
 	}
 }
@@ -32,7 +32,7 @@ void timer::pause() {
 void timer::unpause() {
 	if (started && paused) {
 		paused = false;
-		startTicks = SDL_GetTicks() - pausedTicks;
+		startTicks = SDL_GetTicks64() - pausedTicks;
 		pausedTicks = 0;
 	}
 }

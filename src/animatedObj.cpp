@@ -1,13 +1,15 @@
 #include "animatedObj.h"
 #include <iostream>
 
-animatedObj::animatedObj(std::string path, SDL_Renderer* renderer, int frames, int w, int h) {
+animatedObj::animatedObj(std::string path, SDL_Renderer* renderer, int frames, int w, int h, int fDelay) {
     renderObj();
     createTexture(path, renderer);
     maxFrames = frames;
     currentFrame = 0;
+    frameDelay = fDelay;
     spriteWidth = w;
     spriteHeight = h;
+    advFrameTimer = 0;
     //std::cout << "sw = " << spriteWidth << "sh = " << spriteHeight << "mf = " << maxFrames << std::endl;
 }
 
@@ -20,6 +22,12 @@ void animatedObj::animRender(SDL_Renderer* ren, int x, int y, int w, int h, int 
     if(t.h == 0) t.h = spriteHeight;
     target = &t;
     render(ren, &c);
-    currentFrame++;
+    if(advFrameTimer == 0) {
+        advFrameTimer = SDL_GetTicks64() + frameDelay;
+    }
+    else if(SDL_GetTicks64() > advFrameTimer) {
+        currentFrame++;
+        advFrameTimer = 0;
+    }
     if(currentFrame >= maxFrames) currentFrame = 0;
 }
