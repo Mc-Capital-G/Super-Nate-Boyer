@@ -5,10 +5,13 @@ button::button(std::string label, SDL_Renderer* ren) {
     selected = false;
     text = label;
     createTexture("assets/button.png", ren);
+    labelText = NULL;
 }
 
 void button::buttonRender(SDL_Renderer* ren, int x, int y, int w, int h) {
     SDL_Rect t = {x, y, w, h};
     target = &t;
-    render(ren);
+    SDL_Rect textTarget = {x, y, w * .5, h * .3};
+    render(ren, tex, NULL, target);
+    render(ren, labelText, NULL, &textTarget);
 }

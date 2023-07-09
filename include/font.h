@@ -4,10 +4,8 @@
 
 class font : public renderObj {
 public:
-	font(std::string path, int r = 255, int g = 255, int b = 255, int a = 0);
-	bool createTex(std::string renderText, SDL_Renderer* renderer, int wrapLength);
-	void display(std::string renderText, SDL_Renderer* renderer, int x, int y, int w, int fontSize);
-	std::string pathToFont;
+	font(std::string path, int fontSize, int r = 255, int g = 255, int b = 255, int a = 0);
+	SDL_Texture* createText(std::string renderText, SDL_Renderer* renderer, bool wrap = false, int wrapLength = 0);
 	TTF_Font* fontType;
 	SDL_Color color;
 };
