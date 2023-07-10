@@ -1,6 +1,5 @@
 #pragma once
 #include "renderObj.h"
-#include "font.h"
 
 class button : public renderObj{
 public:

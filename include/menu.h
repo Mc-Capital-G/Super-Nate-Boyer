@@ -1,14 +1,15 @@
 #pragma once
 #include "button.h"
+#include "font.h"
 #include <vector>
 
 
-class menu {
+class menu : public renderObj{
 public:
     menu();
     ~menu();
     int pressButton();
-    std::vector<button> buttons;
-    SDL_Rect viewport;
-    
+    bool press(int x, int y);
+    std::vector<button*> buttons;
+    font* font;
 };
