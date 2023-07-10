@@ -21,7 +21,7 @@ void animatedObj::animRender(SDL_Renderer* ren, int x, int y, int w, int h, int 
     if(t.w == 0) t.w = spriteWidth;
     if(t.h == 0) t.h = spriteHeight;
     target = &t;
-    render(ren, tex, &c, target);
+    render(ren, tex, target, &c);
     if(advFrameTimer == 0) {
         advFrameTimer = SDL_GetTicks64() + frameDelay;
     }

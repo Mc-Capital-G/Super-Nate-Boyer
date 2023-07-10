@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(window.gameRenderer, 0xFF, 0xFF, 0xFF, 0x00);
             
             title.animRender(window.gameRenderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/3, 400, 400);
-            globe.animRender(window.gameRenderer, 0 + globe.target->w/4, SCREEN_HEIGHT - globe.target->h/4, 100, 100);
+            globe.animRender(window.gameRenderer, 0 + 100/2, SCREEN_HEIGHT - 100/2, 100, 100);
             test.buttonRender(window.gameRenderer, SCREEN_WIDTH/2, title.target->y, 200, 100);
 
             SDL_RenderPresent(window.gameRenderer);

@@ -5,5 +5,10 @@
 
 class menu {
 public:
-    std::vector<button>;
+    menu();
+    ~menu();
+    int pressButton();
+    std::vector<button> buttons;
+    SDL_Rect viewport;
+    
 };

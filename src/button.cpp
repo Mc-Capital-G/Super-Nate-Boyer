@@ -12,6 +12,6 @@ void button::buttonRender(SDL_Renderer* ren, int x, int y, int w, int h) {
     SDL_Rect t = {x, y, w, h};
     target = &t;
     SDL_Rect textTarget = {x, y, w * .5, h * .3};
-    render(ren, tex, NULL, target);
-    render(ren, labelText, NULL, &textTarget);
+    render(ren, tex, target);
+    render(ren, labelText, &textTarget);
 }

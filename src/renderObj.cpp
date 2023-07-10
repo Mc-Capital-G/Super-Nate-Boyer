@@ -35,8 +35,26 @@ void renderObj::createTexture(std::string path, SDL_Renderer* renderer) {
 	}
 }
 
-void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* clip, SDL_Rect* t) {
-	t->x -= t->w/2;
-	t->y -= t->h/2;
-	SDL_RenderCopy(renderer, texture, clip, t);
+void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* t, SDL_Rect* clip) {
+
+	//texture, target, and clip all default to the renderObj's objects
+
+	if(texture != NULL && t != NULL) { // given target and texture
+		t->x -= t->w/2;
+		t->y -= t->h/2;
+		SDL_RenderCopy(renderer, texture, clip, t);
+	}
+	else if(t != NULL) { //given target, no texture
+		t->x -= t->w/2;
+		t->y -= t->h/2;
+		SDL_RenderCopy(renderer, tex, clip, t);
+	}
+	else if(texture != NULL) { //given texture, no target
+		t->x -= t->w/2;
+		t->y -= t->h/2;
+		SDL_RenderCopy(renderer, texture, clip, target);
+	}
+	else {
+		SDL_RenderCopy(renderer, tex, clip, target);
+	}
 }
