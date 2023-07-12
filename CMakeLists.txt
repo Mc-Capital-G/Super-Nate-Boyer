@@ -4,28 +4,15 @@ set_property(GLOBAL PROPERTY CXX_STANDARD C++17)
 
 project(SUPER_NATE_BOYER)
 
-find_package(SDL2 REQUIRED PATHS libs/)
-find_package(SDL2_image REQUIRED PATHS libs/)
-find_package(SDL2_mixer REQUIRED PATHS libs/)
-find_package(SDL2_ttf REQUIRED PATHS libs/)
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
-include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
+include_directories( ${PROJECT_SOURCE_DIR}/include ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
 
-add_executable(${PROJECT_NAME} 
-    src/main.cpp 
-    src/window.cpp 
-    src/inputHandler.cpp 
-    src/timer.cpp 
-    src/closeSDL.cpp 
-    src/renderObj.cpp 
-    src/animatedObj.cpp 
-    src/button.cpp 
-    src/menu.cpp 
-    src/font.cpp
-    )
+file(GLOB_RECURSE SOURCES src/*.cpp)
 
-target_include_directories(${PROJECT_NAME} PUBLIC include/ ${SDL2_INCLUDE_DIRS})
-
-target_link_directories(${PROJECT_NAME} PUBLIC libs/)
+add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ${SDL2_LIBRARIES} SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer SDL2_ttf::SDL2_ttf)

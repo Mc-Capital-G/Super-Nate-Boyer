@@ -26,7 +26,7 @@ bool Window::init(const char* title, int screenWidth, int screenHeight) {
 			return false;
 		}
 		else {
-			gameRenderer = SDL_CreateRenderer(gameWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			gameRenderer = SDL_CreateRenderer(gameWindow, -1, SDL_RENDERER_PRESENTVSYNC);
 			if (gameRenderer == NULL) {
 				printf("Renderer could not be created. SDL Error: %s\n", SDL_GetError());
 				return false;
