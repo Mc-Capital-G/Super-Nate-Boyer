@@ -17,7 +17,9 @@ int main(int argc, char* argv[]) {
         inputHandler handler;
         handler.inputTimer.start();
 
-        animatedObj title("assets/titlewiggle.png", window.gameRenderer, 15, 400, 400);
+        mainMenu(window.gameRenderer, &handler);
+
+        /*animatedObj title("assets/titlewiggle.png", window.gameRenderer, 15, 400, 400);
         animatedObj globe("assets/nateboyer3d.png", window.gameRenderer, 10, 400, 400, 100);
         font PublicPixel("assets/PublicPixel.ttf", 25);
         button test("START", window.gameRenderer);
@@ -37,7 +39,7 @@ int main(int argc, char* argv[]) {
             test.buttonRender(window.gameRenderer, SCREEN_WIDTH/2, 600, 200, 100);
 
             SDL_RenderPresent(window.gameRenderer);
-        }
+        }*/
 
     }
     closeSDL();
