@@ -27,8 +27,7 @@ void inputHandler::handle() {
 			pressedKeys.emplace_back(event.button.button); //puts the id of the mouse button that was pressed into pressedKeys
 		default: 
 			for (int i = 0; i < SDL_NUM_SCANCODES; i++) {
-				if (!keyState[i]) break;
-				pressedKeys.emplace_back(i);
+				if (keyState[i]) pressedKeys.emplace_back(i);
 			}
 			break;
 	}
