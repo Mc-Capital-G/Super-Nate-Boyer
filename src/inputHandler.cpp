@@ -39,14 +39,14 @@ void inputHandler::handleKeyboard() {
 
 void inputHandler::handleMouse() {
 	SDL_GetMouseState(&mousePos.x, &mousePos.y);
-	std::cout << "mouse x: " << mousePos.x << " mouse y: " << mousePos.y << std::endl;
+	//std::cout << "mouse x: " << mousePos.x << " mouse y: " << mousePos.y << std::endl;
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch(event.type) {
 		case SDL_QUIT:
 			quit = true;
 			break;
-		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEBUTTONUP:
 			pressedKeys.emplace_back(event.button.button); //puts the id of the mouse button that was pressed into pressedKeys
 			break;
 	}

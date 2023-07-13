@@ -37,8 +37,6 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
 
-        for(int i = 0; i < size; i++) if(menu.buttons[i]->selected) SDL_SetTextureColorMod(menu.buttons[i]->tex, 255, 255, 0); //modulate selected buttons
-
         title.animRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/4, 400, 400);
 
         menu.buttons[START]->buttonRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/1.65, 225, 112);

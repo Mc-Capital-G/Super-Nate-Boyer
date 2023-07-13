@@ -28,8 +28,11 @@ void renderObj::createTexture(std::string path, SDL_Renderer* renderer) {
 			height = loadedSurface->h;
 			SDL_SetTextureBlendMode(newTex, SDL_BLENDMODE_BLEND);
 			SDL_FreeSurface(loadedSurface);
-			SDL_Rect t = { posX, posY, width, height };
-			target = &t;
+			//SDL_Rect t = { posX, posY, width, height };
+			target.x = posX;
+			target.y = posY;
+			target.w = width;
+			target.h = height;
 			tex = newTex;
 		}
 	}
@@ -52,9 +55,9 @@ void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* t
 	else if(texture != NULL) { //given texture, no target
 		t->x -= t->w/2;
 		t->y -= t->h/2;
-		SDL_RenderCopy(renderer, texture, clip, target);
+		SDL_RenderCopy(renderer, texture, clip, &target);
 	}
 	else {
-		SDL_RenderCopy(renderer, tex, clip, target);
+		SDL_RenderCopy(renderer, tex, clip, &target);
 	}
 }

@@ -8,7 +8,7 @@ public:
 	void createTexture(std::string path, SDL_Renderer* renderer);
 	void render(SDL_Renderer* renderer, SDL_Texture* texture = NULL, SDL_Rect* t = NULL, SDL_Rect* clip = NULL);
 	SDL_Texture* tex;
-	SDL_Rect* target;
+	SDL_Rect target;
 	int width;
 	int height;
 	int posX;
