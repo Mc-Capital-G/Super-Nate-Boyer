@@ -7,10 +7,13 @@ class inputHandler {
 public:
 	inputHandler();
 	~inputHandler();
-	std::vector<int> handle();
+	void handle();
 	bool quit;
 	const Uint8* keyState;
 	timer inputTimer;
-private:
+	SDL_Point mousePos;
 	std::vector<int> pressedKeys;
+private:
+	void handleKeyboard();
+	void handleMouse();
 };

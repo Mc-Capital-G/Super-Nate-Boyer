@@ -1,5 +1,6 @@
 #include "includeSDL.h"
 #include "inputHandler.h"
+#include <iostream>
 
 
 inputHandler::inputHandler() {
@@ -12,8 +13,13 @@ inputHandler::~inputHandler() {
 	keyState = NULL;
 }
 
-std::vector<int> inputHandler::handle() {
+void::inputHandler::handle() {
 	pressedKeys.clear();
+	handleKeyboard();
+	handleMouse();
+}
+
+void inputHandler::handleKeyboard() {
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	keyState = SDL_GetKeyboardState(NULL);
@@ -29,5 +35,20 @@ std::vector<int> inputHandler::handle() {
 			}
 			break;
 	}
-	return pressedKeys;
 }
+
+void inputHandler::handleMouse() {
+	SDL_GetMouseState(&mousePos.x, &mousePos.y);
+	std::cout << "mouse x: " << mousePos.x << " mouse y: " << mousePos.y << std::endl;
+	SDL_Event event;
+	SDL_PollEvent(&event);
+	switch(event.type) {
+		case SDL_QUIT:
+			quit = true;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			pressedKeys.emplace_back(event.button.button); //puts the id of the mouse button that was pressed into pressedKeys
+			break;
+	}
+}
+

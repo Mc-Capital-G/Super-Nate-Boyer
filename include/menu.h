@@ -5,15 +5,15 @@
 #include "inputHandler.h"
 #include "animatedObj.h"
 #include <vector>
+#include <iostream>
 
 class menu : public renderObj{
 public:
     menu();
     ~menu();
-    int pressButton();
-    bool press(int x, int y);
-    std::vector<button*> buttons;
+    int buttonHandle(inputHandler* handler);
     font* font;
+    std::vector<button*> buttons;
 };
 
 bool mainMenu(SDL_Renderer* renderer, inputHandler* handler);

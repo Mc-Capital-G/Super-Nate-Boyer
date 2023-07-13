@@ -10,30 +10,14 @@ menu::~menu() {
     font = NULL;
 }
 
-int menu::pressButton() { //return value of button that was pressed
+int menu::buttonHandle(inputHandler* handler) {
+
     int size = buttons.size();
     for(int i = 0; i < size; i++) {
-        if(buttons[i]->pressed) {
-            buttons[i]->pressed = false;
-            return i;
-        } 
+        if(SDL_PointInRect(&handler->mousePos, buttons[i]->target)) {
+            buttons[i]->selected = true;
+        }
+        else buttons[i]->selected = false;
     }
     return -1;
-}
-
-bool menu::press(int x, int y) {
-    int size = buttons.size();
-    for(int i = 0; i < size; i++) { //check click position against buttons, return true if a button is clicked
-        if(x >= buttons[i]->target->x) {
-            if(x <= buttons[i]->target->x + buttons[i]->target->w) {
-                if(y >= buttons[i]->target->y) {
-                    if(y <= buttons[i]->target->y + buttons[i]->target->h) {
-                        buttons[i]->pressed = true;
-                        return true;
-                    } 
-                }
-            }
-        }
-    }
-    return false;
 }
