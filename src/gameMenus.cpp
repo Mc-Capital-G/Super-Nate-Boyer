@@ -34,4 +34,6 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
         
         SDL_RenderPresent(renderer);
     }
+
+    return true;
 }

@@ -7,7 +7,6 @@ menu::menu() {
 
 menu::~menu() {
     buttons.clear();
-    buttons.~vector();
     font = NULL;
 }
 
