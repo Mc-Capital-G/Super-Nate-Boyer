@@ -15,8 +15,8 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
     std::string bTexts[3] = {"START", "OPTIONS", "CREDITS"}; //button labels
 
     for(int i = 0; i < 3; i++) {
-        menu.buttons.emplace_back(new button(bTexts[i], renderer));
-        menu.buttons[i]->labelText = PublicPixel.createText(bTexts[i], renderer);
+        menu.buttons.emplace_back(new button(bTexts[i], renderer)); // create menu buttons
+        menu.buttons[i]->labelText = PublicPixel.createText(bTexts[i], renderer); // create button texts
     }
 
     animatedObj title("assets/titlewiggle.png", renderer, 15, 400, 400);
@@ -38,7 +38,6 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
                 break;
             case OPTIONS:
                 std::cout << "OPTIONS button pressed" << std::endl;
-
                 break;
             case CREDITS:
                 std::cout << "CREDITS button pressed" << std::endl;
@@ -61,4 +60,8 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
     }
 
     return false;
+}
+
+void creditsMenu(SDL_Renderer* renderer, inputHandler* handler) {
+    
 }

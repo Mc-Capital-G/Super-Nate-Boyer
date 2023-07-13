@@ -17,3 +17,4 @@ public:
 };
 
 bool mainMenu(SDL_Renderer* renderer, inputHandler* handler);
+void creditsMenu(SDL_Renderer* renderer, inputHandler* handler);

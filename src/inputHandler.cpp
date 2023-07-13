@@ -2,7 +2,6 @@
 #include "inputHandler.h"
 #include <iostream>
 
-
 inputHandler::inputHandler() {
 	quit = false;
 	keyState = NULL;
@@ -12,8 +11,6 @@ inputHandler::~inputHandler() {
 	quit = true;
 	keyState = NULL;
 }
-
-
 
 void inputHandler::handle() {
 	pressedKeys.clear();
