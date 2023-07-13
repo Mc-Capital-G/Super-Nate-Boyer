@@ -17,29 +17,7 @@ int main(int argc, char* argv[]) {
         inputHandler handler;
         handler.inputTimer.start();
 
-        mainMenu(window.gameRenderer, &handler);
-
-        /*animatedObj title("assets/titlewiggle.png", window.gameRenderer, 15, 400, 400);
-        animatedObj globe("assets/nateboyer3d.png", window.gameRenderer, 10, 400, 400, 100);
-        font PublicPixel("assets/PublicPixel.ttf", 25);
-        button test("START", window.gameRenderer);
-        test.labelText = PublicPixel.createText(test.text, window.gameRenderer);
-        
-
-        while (!handler.quit) {
-            handler.handle();
-
-            
-
-            SDL_RenderClear(window.gameRenderer);
-            SDL_SetRenderDrawColor(window.gameRenderer, 0x00, 0xFF, 0xFF, 0x00);
-            
-            title.animRender(window.gameRenderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/3, 400, 400);
-            globe.animRender(window.gameRenderer, 0 + 100/2, SCREEN_HEIGHT - 100/2, 100, 100);
-            test.buttonRender(window.gameRenderer, SCREEN_WIDTH/2, 600, 200, 100);
-
-            SDL_RenderPresent(window.gameRenderer);
-        }*/
+        if(!mainMenu(window.gameRenderer, &handler)) return 0;
 
     }
     closeSDL();

@@ -13,7 +13,4 @@ public:
 	timer inputTimer;
 	SDL_Point mousePos;
 	std::vector<int> pressedKeys;
-private:
-	void handleKeyboard();
-	void handleMouse();
 };

@@ -15,7 +15,7 @@ void button::buttonRender(SDL_Renderer* ren, int x, int y, int w, int h) {
     target.h = h;
 
     if(selected) {
-        SDL_SetTextureColorMod(tex, 100, 100, 0); // modulate color if selected
+        SDL_SetTextureColorMod(tex, 200, 200, 200); // modulate color if selected
         SDL_SetTextureColorMod(labelText, 255, 255, 0);
     }
     else {

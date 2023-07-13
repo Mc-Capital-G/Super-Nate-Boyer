@@ -30,8 +30,22 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
 
         handler->handle();
 
-        menu.buttonHandle(handler);
+        switch(menu.buttonHandle(handler)) {
 
+            case START:
+                std::cout << "Start button pressed" << std::endl;
+                return true;
+                break;
+            case OPTIONS:
+                std::cout << "OPTIONS button pressed" << std::endl;
+
+                break;
+            case CREDITS:
+                std::cout << "CREDITS button pressed" << std::endl;
+                break;
+            default:
+                break;
+        }
 
         // render zone
         SDL_RenderClear(renderer);
@@ -46,5 +60,5 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
         SDL_RenderPresent(renderer);
     }
 
-    return true;
+    return false;
 }
