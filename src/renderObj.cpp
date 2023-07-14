@@ -58,6 +58,7 @@ void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* t
 		SDL_RenderCopy(renderer, texture, clip, &target);
 	}
 	else {
-		SDL_RenderCopy(renderer, tex, clip, &target);
+		SDL_Rect tempTarg = {target.x - target.w/2, target.y - target.h/2, target.w, target.h};
+		SDL_RenderCopy(renderer, tex, clip, &tempTarg);
 	}
 }
