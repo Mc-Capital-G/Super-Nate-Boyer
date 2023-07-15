@@ -38,9 +38,6 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
     background.target.y = SCREEN_HEIGHT/2;
 
     int size = menu.buttons.size();
-    
-    for(int i = 0; i < size; i++) menu.buttons[i]->labelText = PublicPixel.createText(menu.buttons[i]->text, renderer);
-    
 
     while(!handler->quit){
 
@@ -57,7 +54,7 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
                 break;
             case CREDITS:
                 std::cout << "CREDITS button pressed" << std::endl;
-                creditsMenu(renderer, handler);
+                creditsMenu(renderer, handler, &PublicPixel);
                 break;
             default:
                 break;
@@ -94,6 +91,52 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
     return false;
 }
 
-void creditsMenu(SDL_Renderer* renderer, inputHandler* handler) {
+void creditsMenu(SDL_Renderer* renderer, inputHandler* handler, font* font) {
     
+    SDL_Rect screenViewport = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+
+    SDL_Rect menuViewport;
+    menuViewport.w = SCREEN_WIDTH * .6;
+    menuViewport.h = SCREEN_HEIGHT * .9;
+    menuViewport.x = SCREEN_WIDTH/2 - menuViewport.w/2;
+    menuViewport.y = SCREEN_HEIGHT/2 - menuViewport.h/2;
+    //SDL_RenderSetViewport(renderer, &menuViewport);
+
+    renderObj menuBackground;
+    menuBackground.createTexture("assets/button.png", renderer);
+    menuBackground.target.x = 0;
+    menuBackground.target.y = 0;
+    menuBackground.target.w = menuViewport.w;
+    menuBackground.target.h = menuViewport.h;
+
+    menu credits;
+    credits.buttons.emplace_back(new button("BACK", renderer));
+    credits.buttons[0]->labelText = font->createText(credits.buttons[0]->text, renderer);
+    
+    renderObj title;
+    title.tex = font->createText("CREDITS", renderer);
+    title.target.x = menuViewport.x + menuViewport.w/2;
+    title.target.y = menuViewport.y + 50;
+    title.target.w = menuViewport.w * .4;
+    title.target.h = menuViewport.h * .07;
+
+    while(!handler->quit) {
+
+        handler->handle();
+
+        credits.buttonHandle(handler);
+
+        if(credits.buttons[0]->pressed) break;
+
+
+        //render context
+        SDL_SetTextureColorMod(menuBackground.tex, 0, 0, 0);
+        menuBackground.render(renderer, NULL, &menuViewport, NULL, TOP_LEFT);
+        title.render(renderer);
+        credits.buttons[0]->buttonRender(renderer, menuViewport.x + menuViewport.w/2, menuViewport.y + menuViewport.h - 50, 100, 50);
+
+        SDL_RenderPresent(renderer);
+
+    }
+    //SDL_RenderSetViewport(renderer, &screenViewport);
 }
