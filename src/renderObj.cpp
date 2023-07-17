@@ -15,12 +15,12 @@ renderObj::~renderObj() {
 void renderObj::createTexture(std::string path, SDL_Renderer* renderer) {
 	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
 	if (loadedSurface == NULL) {
-		printf("%s could not be loaded. SDL Error: %s\n", path.c_str(), SDL_GetError());
+		SDL_Log("%s could not be loaded. SDL Error: %s\n", path.c_str(), SDL_GetError());
 	}
 	else {
 		SDL_Texture* newTex = SDL_CreateTextureFromSurface(renderer, loadedSurface);
 		if (newTex == NULL) {
-			printf("Texture could not be created from %s. SDL Error: %s\n", path.c_str(), SDL_GetError());
+			SDL_Log("Texture could not be created from %s. SDL Error: %s\n", path.c_str(), SDL_GetError());
 		}
 		else {
 

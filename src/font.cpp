@@ -13,13 +13,13 @@ SDL_Texture* font::createText(std::string renderText, SDL_Renderer* renderer, bo
 	if(wrap) loadedSurface = TTF_RenderText_Solid_Wrapped(fontType, renderText.c_str(), color, wrapLength);
 	else loadedSurface = TTF_RenderText_Solid(fontType, renderText.c_str(), color);
 	if (loadedSurface == NULL) {
-		printf("Text could not be loaded into a texture. SDL Error: %s\n", SDL_GetError());
+		SDL_Log("Text could not be loaded into a texture. SDL Error: %s\n", SDL_GetError());
 		return NULL;
 	}
 	else {
 		SDL_Texture* newTex = SDL_CreateTextureFromSurface(renderer, loadedSurface);
 		if (newTex == NULL) {
-			printf("Texture could not be created from text. SDL Error: %s\n", SDL_GetError());
+			SDL_Log("Texture could not be created from text. SDL Error: %s\n", SDL_GetError());
 			return NULL;
 		}
 		else {
