@@ -6,6 +6,7 @@
 #include "animatedObj.h"
 #include "menu.h"
 #include "font.h"
+#include "game.h"
 
 int main(int argc, char* argv[]) {
 
@@ -18,6 +19,7 @@ int main(int argc, char* argv[]) {
         handler.inputTimer.start();
 
         if(!mainMenu(window.gameRenderer, &handler)) return 0;
+        game(window.gameRenderer, &handler);
 
     }
     closeSDL();

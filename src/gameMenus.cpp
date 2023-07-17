@@ -46,14 +46,15 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
         switch(menu.buttonHandle(handler)) {
 
             case START:
-                std::cout << "Start button pressed" << std::endl;
+                //std::cout << "Start button pressed" << std::endl;
                 return true;
                 break;
             case OPTIONS:
-                std::cout << "OPTIONS button pressed" << std::endl;
+                //std::cout << "OPTIONS button pressed" << std::endl;
+                tempMenu(renderer, handler);
                 break;
             case CREDITS:
-                std::cout << "CREDITS button pressed" << std::endl;
+                //std::cout << "CREDITS button pressed" << std::endl;
                 creditsMenu(renderer, handler, &PublicPixel);
                 break;
             default:
@@ -139,4 +140,36 @@ void creditsMenu(SDL_Renderer* renderer, inputHandler* handler, font* font) {
 
     }
     //SDL_RenderSetViewport(renderer, &screenViewport);
+}
+
+void tempMenu(SDL_Renderer* renderer, inputHandler* handler) {
+
+    renderObj menu;
+
+    menu.createTexture("assets/menu.png", renderer);
+    menu.target.x = 0;
+    menu.target.y = 0;
+    menu.target.h = SCREEN_HEIGHT;
+    menu.target.w = SCREEN_WIDTH;
+
+    int a = 255;
+
+    Mix_Music* instaThud = Mix_LoadMUS("assets/vineboom.mp3");
+    Mix_PlayMusic(instaThud, 0);
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+
+    while(a >= 0) {
+
+
+
+        SDL_RenderClear(renderer);
+        SDL_SetTextureAlphaMod(menu.tex, a);
+
+        menu.render(renderer, NULL, NULL, NULL, TOP_LEFT);
+
+        SDL_RenderPresent(renderer);
+
+        a -= 2;
+    }
 }
