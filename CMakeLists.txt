@@ -23,4 +23,5 @@ set_target_properties(${PROJECT_NAME}
     RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/Super Nate Boyer"
     )
 
-file(COPY assets DESTINATION "${PROJECT_SOURCE_DIR}/bin/Super Nate Boyer")
+file(GLOB_RECURSE assets assets/*)
+file(COPY assets DESTINATION "${PROJECT_SOURCE_DIR}/bin/Super Nate Boyer/assets")
