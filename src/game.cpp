@@ -7,14 +7,28 @@ void game(SDL_Renderer* renderer, inputHandler* handler) {
     int faceDirection = 0; // temporary value, will be implemented into a player class once we get that far
     //0 - up, 1 - right, 2 - down, 3 - left
 
+    renderObj floor;
+    floor.createTexture("assets/floor.png", renderer);
+    
+
     while(!handler->quit) {
 
-        SDL_Rect tar = {SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200};
+        SDL_Rect tar = {SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 500, 500};
+        SDL_Rect floorTar = {0, 0, 256, 256};
 
         handler->handle();
 
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+        for(int y = 0; floorTar.y < SCREEN_HEIGHT; y++) {
+            floorTar.x = 0;
+            for(int x = 0; floorTar.x < SCREEN_WIDTH; x++) {
+                floor.render(renderer, NULL, &floorTar, NULL, TOP_LEFT);
+                floorTar.x += floorTar.w;
+            }
+            floorTar.y += floorTar.h - 4;
+        }
 
         if(handler->keyState[SDL_SCANCODE_W]) {
             faceDirection = 0;
