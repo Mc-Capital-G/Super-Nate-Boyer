@@ -38,7 +38,7 @@ void renderObj::createTexture(std::string path, SDL_Renderer* renderer) {
 	}
 }
 
-void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* t, SDL_Rect* clip, int alignment) {
+void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* t, SDL_Rect* clip, int alignment, SDL_RendererFlip flip) {
 
 	//texture, target, and clip all default to the renderObj's objects
 
@@ -47,27 +47,27 @@ void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* t
 			t->x -= t->w/2;
 			t->y -= t->h/2;
 		}
-		SDL_RenderCopy(renderer, texture, clip, t);
+		SDL_RenderCopyEx(renderer, texture, clip, t, 0, 0, flip);
 	}
 	else if(t != NULL) { //given target, no texture
 		if(alignment == MIDDLE) {
 			t->x -= t->w/2;
 			t->y -= t->h/2;
 		}
-		SDL_RenderCopy(renderer, tex, clip, t);
+		SDL_RenderCopyEx(renderer, tex, clip, t, 0, 0, flip);
 	}
 	else if(texture != NULL) { //given texture, no target
 		if(alignment == MIDDLE) {
 			t->x -= t->w/2;
 			t->y -= t->h/2;
 		}
-		SDL_RenderCopy(renderer, texture, clip, &target);
+		SDL_RenderCopyEx(renderer, texture, clip, &target, 0, 0, flip);
 	}
 	else { // given nothing
 		if(alignment == MIDDLE) {
 			SDL_Rect tempTarg = {target.x - target.w/2, target.y - target.h/2, target.w, target.h};
-			SDL_RenderCopy(renderer, tex, clip, &tempTarg);
+			SDL_RenderCopyEx(renderer, tex, clip, &tempTarg, 0, 0, flip);
 		} 
-		else SDL_RenderCopy(renderer, tex, clip, &target);
+		else SDL_RenderCopyEx(renderer, tex, clip, &target, 0, 0, flip);
 	}
 }

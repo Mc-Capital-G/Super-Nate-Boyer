@@ -12,10 +12,20 @@ void game(SDL_Renderer* renderer, inputHandler* handler) {
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-        snb.animRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200);
-        snbUPDATE.animRender(renderer, SCREEN_WIDTH/3, SCREEN_HEIGHT/3 - 50, 200, 200);
-        snbUPDATE.animRender(renderer, SCREEN_WIDTH/3, SCREEN_HEIGHT/2, 200, 200, 1);
-        snbUPDATE.animRender(renderer, SCREEN_WIDTH/3, (SCREEN_HEIGHT/3)*2 + 50, 200, 200, 2);
+        if(handler->keyState[SDL_SCANCODE_W]) {
+            snbUPDATE.animRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200);
+        }
+        else if(handler->keyState[SDL_SCANCODE_D]) {
+            snbUPDATE.animRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200, 1);
+        }
+        else if(handler->keyState[SDL_SCANCODE_A]) {
+            
+            snbUPDATE.animRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200, 1, SDL_FLIP_HORIZONTAL);
+            
+        }
+        else if(handler->keyState[SDL_SCANCODE_S]) {
+            snbUPDATE.animRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200, 2);
+        }
 
         SDL_RenderPresent(renderer);
     }
