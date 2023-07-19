@@ -13,8 +13,7 @@ void game(SDL_Renderer* renderer, inputHandler* handler) {
 
     while(!handler->quit) {
 
-        //SDL_Rect tar = {SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 500, 500};
-        SDL_Rect floorTar = {0, 0, 64, 64};
+        SDL_Rect floorTar = {0, 0, 128, 128};
 
         handler->handle();
 
@@ -25,7 +24,7 @@ void game(SDL_Renderer* renderer, inputHandler* handler) {
             floorTar.x = 0;
             for(int x = 0; floorTar.x < SCREEN_WIDTH; x++) {
                 floor.render(renderer, NULL, &floorTar);
-                floorTar.x += floorTar.w;
+                floorTar.x += floorTar.w - 1;
             }
             floorTar.y += floorTar.h - 1;
         }
