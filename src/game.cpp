@@ -2,9 +2,8 @@
 
 void game(SDL_Renderer* renderer, inputHandler* handler) {
 
-    animatedObj snb("assets/SNB_SpriteSheet.png", renderer, 9, 58, 58, 500);
     animatedObj snbUPDATE("assets/snbspritesheetUPDATE.png", renderer, 4, 58, 58, 500);
-    snbUPDATE.target = {SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200};
+    snbUPDATE.setTarget(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200);
     int faceDirection = 0; // temporary value, will be implemented into a player class once we get that far
     //0 - up, 1 - right, 2 - down, 3 - left
 
@@ -15,7 +14,7 @@ void game(SDL_Renderer* renderer, inputHandler* handler) {
     while(!handler->quit) {
 
         //SDL_Rect tar = {SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 500, 500};
-        SDL_Rect floorTar = {0, 0, 256, 256};
+        SDL_Rect floorTar = {0, 0, 64, 64};
 
         handler->handle();
 
@@ -28,7 +27,7 @@ void game(SDL_Renderer* renderer, inputHandler* handler) {
                 floor.render(renderer, NULL, &floorTar);
                 floorTar.x += floorTar.w;
             }
-            floorTar.y += floorTar.h - 4;
+            floorTar.y += floorTar.h - 1;
         }
 
         if(handler->keyState[SDL_SCANCODE_W]) {

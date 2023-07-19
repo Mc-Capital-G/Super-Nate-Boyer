@@ -17,26 +17,19 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
 
     for(int i = 0; i < 3; i++) {
         menu.buttons.emplace_back(new button(bTexts[i], renderer)); // create menu buttons
-        menu.buttons[i]->labelText = PublicPixel.createText(bTexts[i], renderer); // create button texts
+        menu.buttons[i]->labelText.tex = PublicPixel.createText(bTexts[i], renderer); // create button texts
     }
 
-    animatedObj title("assets/titlewiggle.png", renderer, 15, 400, 400);
-    title.target = {SCREEN_WIDTH/2, SCREEN_HEIGHT/4, 400, 400};
+    menu.buttons[START]->setTarget(SCREEN_WIDTH/2, SCREEN_HEIGHT/1.65, 225, 112);
+    menu.buttons[OPTIONS]->setTarget(SCREEN_WIDTH/2, SCREEN_HEIGHT/1.65 + 120, 200, 100);
+    menu.buttons[CREDITS]->setTarget(SCREEN_WIDTH/2, SCREEN_HEIGHT/1.65 + 230, 200, 100);
 
-    renderObj superNate;
-    superNate.createTexture("assets/SuperNateBoyer.png", renderer);
-    superNate.target.x = SCREEN_WIDTH/5;
-    superNate.target.y = SCREEN_HEIGHT/2;
-    superNate.target.w = 200;
-    superNate.target.h = 200;
+    animatedObj title("assets/titlewiggle.png", renderer, 15, 400, 400);
+    title.setTarget(SCREEN_WIDTH/2, SCREEN_HEIGHT/4, 400, 400, MIDDLE);
 
     renderObj background;
     background.createTexture("assets/background.png", renderer);
-    
-    background.target.w = SCREEN_HEIGHT / 0.14765625;
-    background.target.h = SCREEN_HEIGHT;
-    background.target.x = 0 + background.target.w/2;
-    background.target.y = SCREEN_HEIGHT/2;
+    background.setTarget(0, 0, (SCREEN_HEIGHT / 0.14765625), SCREEN_HEIGHT, TOP_LEFT);
 
     int size = menu.buttons.size();
 
@@ -62,11 +55,7 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
                 break;
         }
 
-
-
         SDL_Rect bgTarg2 = {background.target.x + background.target.w, background.target.y, background.target.w, background.target.h};
-
-        SDL_Rect snTarget2 = {superNate.target.x * 4, superNate.target.y, superNate.target.w, superNate.target.h};
 
         // render zone
         SDL_RenderClear(renderer);
@@ -77,17 +66,14 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
 
         title.animRender(renderer);
 
-        superNate.render(renderer);
-        superNate.render(renderer, NULL, &snTarget2);
-
-        menu.buttons[START]->buttonRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/1.65, 225, 112);
-        menu.buttons[OPTIONS]->buttonRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/1.65 + 120, 200, 100);
-        menu.buttons[CREDITS]->buttonRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/1.65 + 230, 200, 100);
+        menu.buttons[START]->buttonRender(renderer);
+        menu.buttons[OPTIONS]->buttonRender(renderer);
+        menu.buttons[CREDITS]->buttonRender(renderer);
         
         SDL_RenderPresent(renderer);
 
         background.target.x--;
-        if(background.target.x + background.target.w < 0 + background.target.w/2) background.target.x = 0 + background.target.w/2;
+        if(background.target.x + background.target.w < 0) background.target.x = 0;
     }
 
     return false;
@@ -102,7 +88,6 @@ void creditsMenu(SDL_Renderer* renderer, inputHandler* handler, font* font) {
     menuViewport.h = SCREEN_HEIGHT * .9;
     menuViewport.x = SCREEN_WIDTH/2 - menuViewport.w/2;
     menuViewport.y = SCREEN_HEIGHT/2 - menuViewport.h/2;
-    //SDL_RenderSetViewport(renderer, &menuViewport);
 
     renderObj menuBackground;
     menuBackground.createTexture("assets/button.png", renderer);
@@ -110,7 +95,8 @@ void creditsMenu(SDL_Renderer* renderer, inputHandler* handler, font* font) {
 
     menu credits;
     credits.buttons.emplace_back(new button("BACK", renderer));
-    credits.buttons[0]->labelText = font->createText(credits.buttons[0]->text, renderer);
+    credits.buttons[0]->labelText.tex = font->createText(credits.buttons[0]->text, renderer);
+    credits.buttons[0]->setTarget(menuViewport.x + menuViewport.w/2, menuViewport.y + menuViewport.h - 50, 100, 50);
     
     renderObj title;
     title.tex = font->createText("CREDITS", renderer);
@@ -124,17 +110,15 @@ void creditsMenu(SDL_Renderer* renderer, inputHandler* handler, font* font) {
 
         if(credits.buttons[0]->pressed) break;
 
-
         //render context
         SDL_SetTextureColorMod(menuBackground.tex, 0, 0, 0);
         menuBackground.render(renderer, NULL, &menuViewport);
         title.render(renderer);
-        credits.buttons[0]->buttonRender(renderer, menuViewport.x + menuViewport.w/2, menuViewport.y + menuViewport.h - 50, 100, 50);
+        credits.buttons[0]->buttonRender(renderer);
 
         SDL_RenderPresent(renderer);
 
     }
-    //SDL_RenderSetViewport(renderer, &screenViewport);
 }
 
 void tempMenu(SDL_Renderer* renderer, inputHandler* handler) {
@@ -143,10 +127,6 @@ void tempMenu(SDL_Renderer* renderer, inputHandler* handler) {
 
     menu.createTexture("assets/menu.png", renderer);
     menu.setTarget(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, TOP_LEFT);
-    menu.target.x = 0;
-    menu.target.y = 0;
-    menu.target.h = SCREEN_HEIGHT;
-    menu.target.w = SCREEN_WIDTH;
 
     int a = 255;
 

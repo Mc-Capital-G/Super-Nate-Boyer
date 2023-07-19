@@ -4,9 +4,9 @@
 class button : public renderObj{
 public:
     button(std::string label, SDL_Renderer* ren);
-    void buttonRender(SDL_Renderer* ren, int x, int y, int w, int h);
+    void buttonRender(SDL_Renderer* ren);
     std::string text;
-    SDL_Texture* labelText;
+    renderObj labelText;
     bool pressed;
     bool selected;
 };
