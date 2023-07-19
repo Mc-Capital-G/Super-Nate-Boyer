@@ -7,6 +7,8 @@ enum ALIGNMENT {
 	TOP_RIGHT = 2
 };
 
+// default class for anything that should be rendered to the screen
+
 class renderObj {
 public:
 	renderObj();
@@ -16,9 +18,5 @@ public:
 	void render(SDL_Renderer* renderer, SDL_Texture* texture = NULL, SDL_Rect* t = NULL, SDL_Rect* clip = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	SDL_Texture* tex;
 	SDL_Rect target;
-	int width;
-	int height;
-	int posX;
-	int posY;
 private:
 };

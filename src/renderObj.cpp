@@ -2,12 +2,8 @@
 
 renderObj::renderObj() {
 	tex = NULL;
-	posX = 0;
-	posY = 0;
-	width = 0;
-	height = 0;
+	target = {0, 0, 0, 0};
 }
-
 renderObj::~renderObj() {
 	SDL_DestroyTexture(tex);
 }
@@ -40,11 +36,11 @@ void renderObj::setTarget(int x, int y, int w, int h, int alignment) { //sets th
 		target.x = x - w/2; 
 		target.y = y - h/2;
 	}
-	if(alignment == TOP_LEFT) { //
+	if(alignment == TOP_LEFT) { //offset given position to render as if the given position were at the top left of the texture
 		target.x = x;
 		target.y = y;
 	}
-	if(alignment == TOP_RIGHT) {
+	if(alignment == TOP_RIGHT) {//offset given position to render as if the given position were at the top right of the texture
 		target.x = x - w;
 		target.y = y;
 	}
@@ -55,6 +51,7 @@ void renderObj::setTarget(int x, int y, int w, int h, int alignment) { //sets th
 void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* t, SDL_Rect* clip, SDL_RendererFlip flip) {
 
 	//texture, target, and clip all default to the renderObj's objects
+	//if a parameter is given as NULL, the function is to use the default values
 
 	if(texture != NULL && t != NULL) SDL_RenderCopyEx(renderer, texture, clip, t, 0, 0, flip); // given target and texture
 

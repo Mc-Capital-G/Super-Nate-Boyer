@@ -23,8 +23,8 @@ SDL_Texture* font::createText(std::string renderText, SDL_Renderer* renderer, bo
 			return NULL;
 		}
 		else {
-			width = loadedSurface->w;
-			height = loadedSurface->h;
+			target.w = loadedSurface->w;
+			target.h = loadedSurface->h;
 			SDL_SetTextureBlendMode(newTex, SDL_BLENDMODE_BLEND);
 			SDL_FreeSurface(loadedSurface);
 			return newTex;
