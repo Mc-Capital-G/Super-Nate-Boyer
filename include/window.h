@@ -1,7 +1,7 @@
 #pragma once
 #include "includeSDL.h"
 
-#define SCREEN_WIDTH 1280
+#define SCREEN_WIDTH 960
 #define SCREEN_HEIGHT 720
 
 class Window {
