@@ -12,38 +12,35 @@ renderObj::~renderObj() {
 	SDL_DestroyTexture(tex);
 }
 
-void renderObj::createTexture(std::string path, SDL_Renderer* renderer) {
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+void renderObj::createTexture(std::string path, SDL_Renderer* renderer) { // create texture from specified path to file
+	SDL_Surface* loadedSurface = IMG_Load(path.c_str()); // loads image file into a SDL_Surface
 	if (loadedSurface == NULL) {
 		SDL_Log("%s could not be loaded. SDL Error: %s\n", path.c_str(), SDL_GetError());
 	}
 	else {
-		SDL_Texture* newTex = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+		SDL_Texture* newTex = SDL_CreateTextureFromSurface(renderer, loadedSurface); // converts surface into texture (textures cannot be loaded directly from files)
 		if (newTex == NULL) {
 			SDL_Log("Texture could not be created from %s. SDL Error: %s\n", path.c_str(), SDL_GetError());
 		}
 		else {
+			//default texture width and height to image size
 
-			width = loadedSurface->w;
-			height = loadedSurface->h;
+			target.w = loadedSurface->w; 
+			target.h = loadedSurface->h;
 			SDL_SetTextureBlendMode(newTex, SDL_BLENDMODE_BLEND);
-			SDL_FreeSurface(loadedSurface);
-			//SDL_Rect t = { posX, posY, width, height };
-			target.x = posX;
-			target.y = posY;
-			target.w = width;
-			target.h = height;
-			tex = newTex;
+			SDL_FreeSurface(loadedSurface); //deallocate SDL_Surface
+
+			tex = newTex; //assign generated texture to desired target
 		}
 	}
 }
 
-void renderObj::setTarget(int x, int y, int w, int h, int alignment) {
-	if(alignment == MIDDLE) {
-		target.x = x - w/2;
+void renderObj::setTarget(int x, int y, int w, int h, int alignment) { //sets the render target for renderObj
+	if(alignment == MIDDLE) { //offset given postion to render as if the given position were at the center of the texture
+		target.x = x - w/2; 
 		target.y = y - h/2;
 	}
-	if(alignment == TOP_LEFT) {
+	if(alignment == TOP_LEFT) { //
 		target.x = x;
 		target.y = y;
 	}
