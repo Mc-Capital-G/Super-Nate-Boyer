@@ -12,17 +12,17 @@ menu::~menu() {
 
 int menu::buttonHandle(inputHandler* handler) {
 
-    int size = buttons.size();
-    int pKeys = handler->pressedKeys.size();
+    int size = buttons.size(); //get number of buttons in the menu
+    int pKeys = handler->pressedKeys.size(); //get number of pressed keys
     for(int i = 0; i < size; i++) {
-        if(!SDL_PointInRect(&handler->mousePos, &buttons[i]->target)) {
+        if(!SDL_PointInRect(&handler->mousePos, &buttons[i]->target)) { //selects button if the mouse is hovering over the button
             buttons[i]->selected = false;
             continue;
         }
         buttons[i]->selected = true;
         
         for(int j = 0; j < pKeys; i++) {
-            if(handler->pressedKeys[j] == SDL_BUTTON_LEFT) {
+            if(handler->pressedKeys[j] == SDL_BUTTON_LEFT) { //presses button if LMB is pressed and mouse is hovering over button
                 buttons[i]->pressed = true;
                 return i;
             }

@@ -16,6 +16,8 @@ public:
     std::vector<button*> buttons;
 };
 
+//define functions that correspond to menus for the game -> each are labeled for what they do
+
 bool mainMenu(SDL_Renderer* renderer, inputHandler* handler);
 void creditsMenu(SDL_Renderer* renderer, inputHandler* handler, font* font);
 void tempMenu(SDL_Renderer* renderer, inputHandler* handler);

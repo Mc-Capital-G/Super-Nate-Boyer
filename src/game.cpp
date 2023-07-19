@@ -1,6 +1,6 @@
 #include "game.h"
 
-void game(SDL_Renderer* renderer, inputHandler* handler) {
+void game(SDL_Renderer* renderer, inputHandler* handler) { //most of this is temporary code being used for testing/proof of concept at the moment, therefore not documented well
 
     animatedObj snbUPDATE("assets/snbspritesheetUPDATE.png", renderer, 4, 58, 58, 200);
     snbUPDATE.setTarget(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200);

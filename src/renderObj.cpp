@@ -19,8 +19,8 @@ void renderObj::createTexture(std::string path, SDL_Renderer* renderer) { // cre
 			SDL_Log("Texture could not be created from %s. SDL Error: %s\n", path.c_str(), SDL_GetError());
 		}
 		else {
-			//default texture width and height to image size
 
+			//default texture width and height to image size
 			target.w = loadedSurface->w; 
 			target.h = loadedSurface->h;
 			SDL_SetTextureBlendMode(newTex, SDL_BLENDMODE_BLEND);

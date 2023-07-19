@@ -10,7 +10,7 @@ button::button(std::string label, SDL_Renderer* ren) {
 void button::buttonRender(SDL_Renderer* ren) {
 
     if(selected) {
-        SDL_SetTextureColorMod(tex, 200, 200, 200); // modulate color if selected
+        SDL_SetTextureColorMod(tex, 200, 200, 200); // modulate color if selected ->darkenns button and highlights text
         SDL_SetTextureColorMod(labelText.tex, 255, 255, 0);
     }
     else {
@@ -18,7 +18,7 @@ void button::buttonRender(SDL_Renderer* ren) {
         SDL_SetTextureColorMod(labelText.tex, 255, 255, 255);
     }
 
-    labelText.setTarget(target.x + target.w/2, target.y + target.h/2, target.w * .5, target.h * .3, MIDDLE);
+    labelText.setTarget(target.x + target.w/2, target.y + target.h/2, target.w * .5, target.h * .3, MIDDLE); //sets target for button label
 
     render(ren);
     labelText.render(ren);

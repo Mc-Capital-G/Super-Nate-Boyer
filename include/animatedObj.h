@@ -1,6 +1,8 @@
 #pragma once
 #include "renderObj.h"
 
+//default class for any object we want to render with an animation - can interpret sprite sheets
+
 class animatedObj : public renderObj {
 
 public:
