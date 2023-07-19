@@ -2,7 +2,7 @@
 
 void game(SDL_Renderer* renderer, inputHandler* handler) {
 
-    animatedObj snbUPDATE("assets/snbspritesheetUPDATE.png", renderer, 4, 58, 58, 500);
+    animatedObj snbUPDATE("assets/snbspritesheetUPDATE.png", renderer, 4, 58, 58, 200);
     snbUPDATE.setTarget(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200, 200);
     int faceDirection = 0; // temporary value, will be implemented into a player class once we get that far
     //0 - up, 1 - right, 2 - down, 3 - left
@@ -10,6 +10,9 @@ void game(SDL_Renderer* renderer, inputHandler* handler) {
     renderObj floor;
     floor.createTexture("assets/floor.png", renderer);
     
+    renderObj bookshelf;
+    bookshelf.createTexture("assets/bookshelf.png", renderer);
+    bookshelf.setTarget(SCREEN_WIDTH/3, SCREEN_HEIGHT/3, 256, 128);
 
     while(!handler->quit) {
 
@@ -29,21 +32,26 @@ void game(SDL_Renderer* renderer, inputHandler* handler) {
             floorTar.y += floorTar.h - 1;
         }
 
+        bookshelf.render(renderer);
+
         if(handler->keyState[SDL_SCANCODE_W]) {
             faceDirection = 0;
+            snbUPDATE.target.y-=2;
             snbUPDATE.animRender(renderer);
         }
         else if(handler->keyState[SDL_SCANCODE_D]) {
             faceDirection = 1;
+            snbUPDATE.target.x+=2;
             snbUPDATE.animRender(renderer, 1);
         }
         else if(handler->keyState[SDL_SCANCODE_A]) {
             faceDirection = 3;
             snbUPDATE.animRender(renderer, 1, SDL_FLIP_HORIZONTAL);
-            
+            snbUPDATE.target.x-=2;
         }
         else if(handler->keyState[SDL_SCANCODE_S]) {
             faceDirection = 2;
+            snbUPDATE.target.y+=2;
             snbUPDATE.animRender(renderer, 2);
         }
         else {
