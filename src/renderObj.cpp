@@ -38,36 +38,33 @@ void renderObj::createTexture(std::string path, SDL_Renderer* renderer) {
 	}
 }
 
-void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* t, SDL_Rect* clip, int alignment, SDL_RendererFlip flip) {
+void renderObj::setTarget(int x, int y, int w, int h, int alignment) {
+	if(alignment == MIDDLE) {
+		target.x = x - w/2;
+		target.y = y - h/2;
+	}
+	if(alignment == TOP_LEFT) {
+		target.x = x;
+		target.y = y;
+	}
+	if(alignment == TOP_RIGHT) {
+		target.x = x - w;
+		target.y = y;
+	}
+		target.w = w;
+		target.h = h;
+}
+
+void renderObj::render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* t, SDL_Rect* clip, SDL_RendererFlip flip) {
 
 	//texture, target, and clip all default to the renderObj's objects
 
-	if(texture != NULL && t != NULL) { // given target and texture
-		if(alignment == MIDDLE) {
-			t->x -= t->w/2;
-			t->y -= t->h/2;
-		}
-		SDL_RenderCopyEx(renderer, texture, clip, t, 0, 0, flip);
-	}
-	else if(t != NULL) { //given target, no texture
-		if(alignment == MIDDLE) {
-			t->x -= t->w/2;
-			t->y -= t->h/2;
-		}
-		SDL_RenderCopyEx(renderer, tex, clip, t, 0, 0, flip);
-	}
-	else if(texture != NULL) { //given texture, no target
-		if(alignment == MIDDLE) {
-			t->x -= t->w/2;
-			t->y -= t->h/2;
-		}
-		SDL_RenderCopyEx(renderer, texture, clip, &target, 0, 0, flip);
-	}
-	else { // given nothing
-		if(alignment == MIDDLE) {
-			SDL_Rect tempTarg = {target.x - target.w/2, target.y - target.h/2, target.w, target.h};
-			SDL_RenderCopyEx(renderer, tex, clip, &tempTarg, 0, 0, flip);
-		} 
-		else SDL_RenderCopyEx(renderer, tex, clip, &target, 0, 0, flip);
-	}
+	if(texture != NULL && t != NULL) SDL_RenderCopyEx(renderer, texture, clip, t, 0, 0, flip); // given target and texture
+
+	else if(t != NULL) SDL_RenderCopyEx(renderer, tex, clip, t, 0, 0, flip); //given target, no texture
+
+	else if(texture != NULL) SDL_RenderCopyEx(renderer, texture, clip, &target, 0, 0, flip); //given texture, no target
+
+	else SDL_RenderCopyEx(renderer, tex, clip, &target, 0, 0, flip); // given nothing
+
 }

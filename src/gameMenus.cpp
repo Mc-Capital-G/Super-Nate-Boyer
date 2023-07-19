@@ -21,6 +21,7 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
     }
 
     animatedObj title("assets/titlewiggle.png", renderer, 15, 400, 400);
+    title.target = {SCREEN_WIDTH/2, SCREEN_HEIGHT/4, 400, 400};
 
     renderObj superNate;
     superNate.createTexture("assets/SuperNateBoyer.png", renderer);
@@ -72,9 +73,9 @@ bool mainMenu(SDL_Renderer* renderer, inputHandler* handler) {
         SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
 
         background.render(renderer);
-        background.render(renderer, NULL, &bgTarg2, NULL);
+        background.render(renderer, NULL, &bgTarg2);
 
-        title.animRender(renderer, SCREEN_WIDTH/2, SCREEN_HEIGHT/4, 400, 400);
+        title.animRender(renderer);
 
         superNate.render(renderer);
         superNate.render(renderer, NULL, &snTarget2);
@@ -105,10 +106,7 @@ void creditsMenu(SDL_Renderer* renderer, inputHandler* handler, font* font) {
 
     renderObj menuBackground;
     menuBackground.createTexture("assets/button.png", renderer);
-    menuBackground.target.x = 0;
-    menuBackground.target.y = 0;
-    menuBackground.target.w = menuViewport.w;
-    menuBackground.target.h = menuViewport.h;
+    menuBackground.setTarget(0, 0, menuViewport.w, menuViewport.h, TOP_LEFT);
 
     menu credits;
     credits.buttons.emplace_back(new button("BACK", renderer));
@@ -116,10 +114,7 @@ void creditsMenu(SDL_Renderer* renderer, inputHandler* handler, font* font) {
     
     renderObj title;
     title.tex = font->createText("CREDITS", renderer);
-    title.target.x = menuViewport.x + menuViewport.w/2;
-    title.target.y = menuViewport.y + 50;
-    title.target.w = menuViewport.w * .4;
-    title.target.h = menuViewport.h * .07;
+    title.setTarget(menuViewport.x + menuViewport.w/2, menuViewport.y + 50, menuViewport.w * .4, menuViewport.h * .07);
 
     while(!handler->quit) {
 
@@ -132,7 +127,7 @@ void creditsMenu(SDL_Renderer* renderer, inputHandler* handler, font* font) {
 
         //render context
         SDL_SetTextureColorMod(menuBackground.tex, 0, 0, 0);
-        menuBackground.render(renderer, NULL, &menuViewport, NULL, TOP_LEFT);
+        menuBackground.render(renderer, NULL, &menuViewport);
         title.render(renderer);
         credits.buttons[0]->buttonRender(renderer, menuViewport.x + menuViewport.w/2, menuViewport.y + menuViewport.h - 50, 100, 50);
 
@@ -147,6 +142,7 @@ void tempMenu(SDL_Renderer* renderer, inputHandler* handler) {
     renderObj menu;
 
     menu.createTexture("assets/menu.png", renderer);
+    menu.setTarget(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, TOP_LEFT);
     menu.target.x = 0;
     menu.target.y = 0;
     menu.target.h = SCREEN_HEIGHT;
@@ -166,7 +162,7 @@ void tempMenu(SDL_Renderer* renderer, inputHandler* handler) {
         SDL_RenderClear(renderer);
         SDL_SetTextureAlphaMod(menu.tex, a);
 
-        menu.render(renderer, NULL, NULL, NULL, TOP_LEFT);
+        menu.render(renderer);
 
         SDL_RenderPresent(renderer);
 

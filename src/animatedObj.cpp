@@ -13,18 +13,13 @@ animatedObj::animatedObj(std::string path, SDL_Renderer* renderer, int frames, i
     //std::cout << "sw = " << spriteWidth << "sh = " << spriteHeight << "mf = " << maxFrames << std::endl;
 }
 
-void animatedObj::animRender(SDL_Renderer* ren, int x, int y, int w, int h, int animationNum, SDL_RendererFlip flip) {
+void animatedObj::animRender(SDL_Renderer* ren, int animationNum, SDL_RendererFlip flip) {
     //std::cout << "current frame = " << currentFrame << std::endl;
     SDL_Rect c = {spriteWidth * currentFrame, spriteHeight * animationNum, spriteWidth, spriteHeight}; //calculate render clip based on what frame we are on, and the sprite width/height
     //std::cout << "c.x = " << c.x << " c.y = " << c.y << " c.h = " << c.h << " c.w = " << c.w << std::endl;
     //SDL_Rect t = {x, y, w, h};
-    target.x = x;
-    target.y = y;
-    target.w = w;
-    target.h = h;
-    if(w == 0) target.w = spriteWidth;
-    if(h == 0) target.h = spriteHeight;
-    render(ren, tex, &target, &c, MIDDLE, flip);
+
+    render(ren, tex, &target, &c, flip);
     if(advFrameTimer == 0) {
         advFrameTimer = SDL_GetTicks64() + frameDelay;
     }
